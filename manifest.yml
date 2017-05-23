@@ -1,0 +1,11 @@
+---
+applications:
+- name: addressapiclient
+  memory: 1024M
+  host: addressapiclient
+  instance: 1
+  path: target/addressclient-0.0.1-SNAPSHOT.war
+  
+  services:
+    - newrelic 
+  

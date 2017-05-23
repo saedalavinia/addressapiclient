@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	
+	
+		
+
+	<p:dialog id="AddAddressDialog" header="Add Address" widgetVar="AddAddressDialog"> 
+
+		<h:panelGrid id="display" columns="2" cellpadding="3">
+
+			<h:outputLabel styleClass="outputLabel" for="streetNumberInput" id="streetNumberOutput"
+				value="Street Number:">
+			</h:outputLabel>
+			<p:inputText styleClass="inputText" required="true"
+				value="#{addaddress.newAddress.streetNumber}" id="streetNumberInput">
+				<f:convertNumber integerOnly="true"></f:convertNumber>
+			</p:inputText>
+
+			<h:outputLabel styleClass="outputLabel" for="streetAddressInput"
+				id="streetAddressOutput" value="Street Address:">
+			</h:outputLabel>
+			<p:inputText styleClass="inputText" required="true"
+				value="#{addaddress.newAddress.streetAddress}" id="streetAddressInput">
+			</p:inputText>
+			
+			<h:outputLabel styleClass="outputLabel" for="cityInput"
+				id="cityOutput" value="City:">
+			</h:outputLabel>
+			<p:inputText styleClass="inputText" required="true"
+				value="#{addaddress.newAddress.city}" id="cityInput">
+				<f:validateRegex pattern="[a-zA-Z]+"/>
+			</p:inputText>
+			
+			<h:outputLabel styleClass="outputLabel" for="provinceInput"
+				id="provinceOutput" value="Province:">
+			</h:outputLabel>
+			<p:selectOneMenu styleClass="selectOneMenu" effect="fade"
+				id="provinceInput" value="#{addaddress.newAddress.province}"
+				style="width:65px;">
+				<f:selectItem itemLabel="AB" itemValue="AB" id="AB" />
+				<f:selectItem itemLabel="BC" itemValue="BC" id="BC" />
+				<f:selectItem itemLabel="MB" itemValue="MB" id="MB" />
+				<f:selectItem itemLabel="NB" itemValue="NB" id="NB" />
+				<f:selectItem itemLabel="NL" itemValue="NL" id="NL" />
+				<f:selectItem itemLabel="NS" itemValue="NS" id="NS" />
+				<f:selectItem itemLabel="NT" itemValue="NT" id="NT" />
+				<f:selectItem itemLabel="NU" itemValue="NU" id="NU" />
+				<f:selectItem itemLabel="ON" itemValue="ON" id="ON" />
+				<f:selectItem itemLabel="PE" itemValue="PE" id="PE" />
+				<f:selectItem itemLabel="QC" itemValue="QC" id="QC" />
+				<f:selectItem itemLabel="SK" itemValue="SK" id="SK" />
+				<f:selectItem itemLabel="YT" itemValue="YT" id="YT" />
+			</p:selectOneMenu>
+
+			<h:outputLabel styleClass="outputLabel" for="countryInput"
+				id="countryOutput" value="Country: ">
+			</h:outputLabel>
+			<p:selectOneMenu styleClass="selectOneMenu" effect="fade"
+				id="countryInput" value="#{addaddress.newAddress.country}"
+				style="width:100px;">
+				<f:selectItem itemLabel="Canada" itemValue="Canada" id="Canada" />
+			</p:selectOneMenu>
+
+
+			<h:outputLabel styleClass="outputLabel" for="postalCodeInput"
+				id="postalCodeOutput" value="Postal Code:">
+			</h:outputLabel>
+			<p:inputText styleClass="inputText" required="true"
+				value="#{addaddress.newAddress.postalCode}" id="postalCodeInput"
+				size="6">
+				<f:validateRegex pattern="[ABCEGHJKLMNPRSTVXY][0-9][ABCEGHJKLMNPRSTVWXYZ][0-9][ABCEGHJKLMNPRSTVWXYZ][0-9]" />
+			</p:inputText>
+
+			<h:outputLabel styleClass="outputLabel" for="dateFromInput"
+				id="dateFromOutput" value="From:">
+			</h:outputLabel>
+			<p:calendar required="true" value="#{addaddress.newAddress.dateFrom}"
+				id="dateFromInput">
+			</p:calendar>
+			<h:outputLabel styleClass="outputLabel" for="dateToInput"
+				id="dateToOutput" value="To:">
+			</h:outputLabel>
+			<p:calendar required="true"
+				value="#{addaddress.newAddress.dateTo}" id="dateToInput"></p:calendar>
+
+			<p:commandButton type="submit" value="Add Address"
+				styleClass="commandButton" id="addAddressCommandButton"
+				action="#{addaddress.commit}" update=":addAddress:addressHistoryTable,:growlForm:growl">
+			</p:commandButton>
+
+		</h:panelGrid>
+
+		<p></p>
+	</p:dialog>
+
+
+
+
+</ui:composition>

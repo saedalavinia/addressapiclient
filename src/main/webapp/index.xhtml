@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- jsf:pagecode language="java" location="/src/pagecode/Schedule.java" -->
+<!-- /jsf:pagecode -->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/resources/templates/MasterLayout.xhtml"
+	xmlns:p="http://primefaces.org/ui">
+
+	<!-- Header Properties starts -->
+	<ui:define name="windowTitle">Main</ui:define>
+	<ui:define name="references">
+		<link href="resources/stylesheets/main.css" type="text/css"
+			title="Style" rel="stylesheet" />
+	</ui:define>
+	<!-- Header Properties ends  -->
+
+	<!-- Content Properties  -->
+	<ui:define name="content">
+	
+		<br />
+		<br />
+		<h:form styleClass="form" id="growlForm" width="0"
+			style=" display: inline;">
+			<p:growl id="growl" showDetail="true" life="5000" />
+		</h:form>
+
+		<h:form styleClass="form" id="addPerson" width="0"
+			style=" display: inline;">
+			<p:commandButton type="submit" value="Add a New Member"
+				styleClass="commandButton" id="AddaPerson" rendered="true"
+				oncomplete="PF('AddPersonDialog').show();"
+				update=":viewPersonForm:viewMemberTable"
+				title="Add a new Member"></p:commandButton>
+			<ui:include src="/resources/dialogs/addPersonDialog.xhtml" />
+		</h:form>
+
+		<h:outputText value="&#160;&#160;" />
+
+		<h:form styleClass="form" id="viewPersonForm" width="0"
+			style=" display: inline;">
+			<p:commandButton type="submit" value="View All Members"
+				styleClass="commandButton" id="viewPersonCommandButton"
+				rendered="true" oncomplete="PF('viewPersonDialog').show();"
+				title="View All Members">
+			</p:commandButton>
+			<ui:include src="/resources/dialogs/viewPersonDialog.xhtml" />
+		</h:form>
+
+
+		<br />
+		<br />
+
+		<br />
+		<br />
+
+		<h:form styleClass="form" id="viewAddress" width="0"
+			style=" display: inline;">
+			<h:outputLabel styleClass="outputLabel" for="sinInputForAddress"
+				id="sinOutputForAddress"
+				value="Enter a Member's SIN to View or Add Address History:">
+			</h:outputLabel>
+			<h:outputText value="&#160;&#160;" />
+
+			<p:inputText styleClass="inputText" required="true"
+				value="#{addaddress.person.sin}" id="sinInputForAddress" size="9">
+				<f:validateLength for="sinInput" minimum="9" maximum="9"></f:validateLength>
+			</p:inputText>
+			<br />
+			<br />
+
+			<p:commandButton type="submit" value="Look up Member"
+				styleClass="commandButton" id="lookUpMemberCommandButton"
+				action="#{addaddress.lookup}"
+				update=":addAddress:addressHistoryFieldSet,:growlForm:growl">
+			</p:commandButton>
+		</h:form>
+
+		<br />
+		<br />
+		<br />
+		<br />
+
+		<h:form styleClass="form" id="addAddress" width="0"
+			style=" display: inline;">
+			<p:fieldset rendered="true" legend="Address History"
+				toggleable="true" toggleSpeed="500" style="width:88%"
+				id="addressHistoryFieldSet">
+
+
+				<br />
+				<p:commandButton rendered="#{addaddress.memberSelected}"
+					type="submit" value="Add A New Address" styleClass="commandButton"
+					id="AddAddress" oncomplete="PF('AddAddressDialog').show();"
+					title="Add a new Address">
+					<f:param name="mynewid" value="1" />
+				</p:commandButton>
+				<ui:include src="/resources/dialogs/addAddressDialog.xhtml" />
+
+				<br />
+				<br />
+
+				<h:outputText rendered="#{!addaddress.memberSelected}"
+					value="Member not selected or does not exist. Enter a Member's SIN to search address history."></h:outputText>
+				<br />
+
+				<h:outputText rendered="#{addaddress.memberSelected}"
+					value="Member Sin: #{addaddress.person.sin}"></h:outputText>
+				<br />
+
+				<h:outputText rendered="#{addaddress.memberSelected}"
+					value="Member First Name: #{addaddress.person.firstName}"></h:outputText>
+				<br />
+
+				<h:outputText rendered="#{addaddress.memberSelected}"
+					value="Member Last Name: #{addaddress.person.lastName}"></h:outputText>
+				<br />
+				<br />
+
+
+				<p:dataTable id="addressHistoryTable"
+					rendered="#{addaddress.memberSelected}" var="address"
+					value="#{addaddress.addresses}" rowKey="#{address.id}"
+					selectionMode="single">
+
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="Street Number" />
+						</f:facet>
+						<h:outputText value="#{address.streetNumber}" />
+					</p:column>
+
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="Street Address" />
+						</f:facet>
+						<h:outputText value="#{address.streetAddress}"  />
+					</p:column>
+
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="City" />
+						</f:facet>
+						<h:outputText value="#{address.city}" />
+					</p:column>
+
+
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="Province" />
+						</f:facet>
+						<h:outputText value="#{address.province}" />
+					</p:column>
+
+
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="Country" />
+						</f:facet>
+						<h:outputText value="#{address.country}" />
+					</p:column>
+
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="Postal Code" />
+						</f:facet>
+						<h:outputText value="#{address.postalCode}" />
+					</p:column>
+
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="From" />
+						</f:facet>
+						<h:outputText value="#{address.dateFrom}" />
+					</p:column>
+
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="To" />
+						</f:facet>
+						<h:outputText value="#{address.dateTo}" />
+					</p:column>
+
+				</p:dataTable>
+
+			</p:fieldset>
+		</h:form>
+		<br />
+		<br />
+		<br />
+		<br />
+	</ui:define>
+</ui:composition>

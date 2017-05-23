@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+
+	<p:dialog id="viewPersonDialog" header="Registered Members" 
+		widgetVar="viewPersonDialog"  resizable="true" width="50%">
+
+
+		<p:dataTable id="viewMemberTable" var="member"
+			value="#{viewmembers.members}" rowKey="#{member.sin}"
+			selectionMode="single">
+			
+			<p:column>
+				<f:facet name="header">
+					<h:outputText value="SIN" />
+				</f:facet>
+				<h:outputText value="#{member.sin}" height="12p" />
+			</p:column>
+
+			<p:column>
+				<f:facet name="header">
+					<h:outputText value="First Name" />
+				</f:facet>
+				<h:outputText value="#{member.firstName}" />
+			</p:column>
+
+			<p:column>
+				<f:facet name="header">
+					<h:outputText value="Last Name" />
+				</f:facet>
+				<h:outputText value="#{member.lastName}" />
+			</p:column>
+
+
+		</p:dataTable>
+
+
+		<p></p>
+	</p:dialog>
+
+
+
+
+</ui:composition>

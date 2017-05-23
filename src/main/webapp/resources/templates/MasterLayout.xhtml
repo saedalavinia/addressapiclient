@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<!-- Header Properties  -->
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title><ui:insert name="windowTitle"></ui:insert></title>
+
+	<ui:insert name="references">
+		<link href="../stylesheets/main.css" type="text/css"
+			title="Style" rel="stylesheet"></link>
+	</ui:insert>
+
+</h:head>
+
+<h:body>
+
+	<f:view>
+		<f:event listener="#{mainview.pageOnLoad }" type="preRenderView"></f:event>
+
+		<p:panel style="width:99.5%">
+			<div id="Header">
+				<ui:include src="/resources/templates/Header.xhtml"></ui:include>
+			</div>
+			<div id="content">
+				<ui:insert name="content"></ui:insert>
+			</div>
+			<div id="Footer">
+				<ui:include src="/resources/templates/Footer.xhtml"></ui:include>
+			</div>
+		</p:panel>
+	</f:view>
+
+</h:body>
+</html>

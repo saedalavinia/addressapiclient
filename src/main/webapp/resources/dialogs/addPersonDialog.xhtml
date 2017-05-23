@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:growl id="growl" showDetail="false" life="10000" />
+
+	<p:dialog id="AddPersonDialog" header="Add Person" 
+		widgetVar="AddPersonDialog" appendToBody="false"> 
+
+		<h:panelGrid id="display" columns="2" cellpadding="3">
+
+			<h:outputLabel styleClass="outputLabel" for="sinInput" id="sinOutput"
+				value="SIN:">
+			</h:outputLabel>
+			<p:inputText styleClass="inputText" required="true"
+				value="#{addperson.person.sin}" id="sinInput" size="9">
+				<f:validateLength for="sinInput"  minimum="9" maximum="9"></f:validateLength>
+			</p:inputText>
+
+			<h:outputLabel styleClass="outputLabel" for="firstNameInput" id="firstNameOutput"
+				value="First Name:">
+			</h:outputLabel>
+			<p:inputText styleClass="inputText" required="true"
+				value="#{addperson.person.firstName}" id="firstNameInput" >
+			</p:inputText>
+			
+			<h:outputLabel styleClass="outputLabel" for="lastNameInput" id="lastNameOutput"
+				value="Last Name:">
+			</h:outputLabel>
+			<p:inputText styleClass="inputText" required="true"
+				value="#{addperson.person.lastName}" id="lastNameInput" >
+			</p:inputText>
+
+
+			<p:commandButton type="submit" value="Add Person"
+				styleClass="commandButton" id="addPersonCommandButton"
+				action="#{addperson.commit}" update=":viewPersonForm:viewMemberTable,:growlForm:growl">
+			</p:commandButton>
+
+		</h:panelGrid>
+
+		<p></p>
+	</p:dialog>
+
+
+
+
+</ui:composition>
